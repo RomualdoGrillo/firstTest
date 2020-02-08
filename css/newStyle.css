@@ -1,10 +1,14 @@
+:root {
+  --div-radius: 15px;
+}
+
 div{
 	display:flex;
 	align-items:center;
 }
 [data-atom] {
     background-color: white;
-	border: 1px solid #DAD9D9;
+    border: 1px solid #DAD9D9;
 }
 /*[data-atom="eq"].asymmetric sono le definizioni, in quel tipo di atomi
 il bordo del primo membro sporge dal background venendo a "fondersi" con il bordo esterno verde
@@ -46,7 +50,7 @@ per una questione estetica */
 [data-atom],[class*="_role"],#overlay {
 	position:relative;
 	/*border: 1px black solid; just for debug*/
-	border-radius: 15px;
+	border-radius: var(--div-radius);
 	font-family: arial;
 	flex-shrink:0;
 	justify-content:center;
@@ -134,7 +138,7 @@ per una questione estetica */
 [data-atom="and"]>.ul_role>[data-atom]{
 	margin:2px;
 }
-/* le definizioni occupano piÃ¹ spazio a causa del sigillo che sporge*/
+/* le definizioni occupano piÃƒÂ¹ spazio a causa del sigillo che sporge*/
 /*[data-atom="and"]>.ul_role>[data-atom].asymmetric{
 	margin-top:2px;
 }*/
@@ -217,7 +221,7 @@ per una questione estetica */
 }
 	
 .defSymbol {
-	border-radius: 15px;
+	border-radius: var(--div-radius);
 	background-color: black;
 	position: absolute;
 	left: 0;
@@ -316,21 +320,27 @@ per una questione estetica */
     background-color: #e2d9d6;
 }
 
-.selected, .selected[data-atom] {
-    /*border-color: red!important;*/
- 	background-color:f1f1f1;
+/*.selected[data-atom], .selected[data-atom]>.s_role>.glued ,.selected[data-atom]>.s_role>.glued[data-atom]>*{*/
+.selected[data-atom], .selected[data-atom] [data-atom]{
+    background-color:f1f1f1;
+}
+.unselected[data-atom], .unselected[data-atom] [data-atom]{
+	background-color:white!important;
 }
 
-.unselected[data-atom]  {
-	/*border-color: blue;*/
+.debug .selected[data-atom] /*,.selected[data-atom]>.s_role>.glued*/{
+	border-color: red!important;
+}
+.debug .unselected[data-atom]  {
+	border-color: blue!important;
 	z-index:1 } 
 
-.waiting {/*grayout all but .waiting DIV */
+.exclusiveFocus {/*grayout all but .exclusiveFocus DIV */
 	z-index:100;
 	box-shadow: 0 0 0 999px #96959542;
 }
 
-#telaRole .waiting .forallSymbol{
+#telaRole .exclusiveFocus .forallSymbol{
 	display: none
 }
 
@@ -345,42 +355,50 @@ per una questione estetica */
     border-right: #ffffff;
 }
 
-.target-associative{
-	/*background-color: #fbfbfb!important;*/
-	/*background-color: green!important;*/
+.debug .target-opened, .debug  .target-openedDnD{
+	background-color: pink!important;
 }
 
-.target-replaced:not(.hover) *{ 
-	background-color: #F9F9F9!important;
-	/*background-color: blue!important;*/
+.debug .target-associative, .debug .target-associativeDnD{
+	background-color: green!important;
 }
 
+ 
+.debug .target-distributiveDnD *{
+	background-color: #d69ece!important;
+	cursor: url(../images/distributeDown.svg), auto;
+}
+
+
+/*.hover.target-distributive , .hover.target-distributiveDnD *{ 
+    cursor: url(../images/distributeDown.svg), auto;
+}*/
+
+/*.target-collection, .target-collectDnD {
+	background-color: aqua!important;
+    cursor: url(../images/collectUp.svg), auto;
+}*/
 /*
-.target-distributive *{ 
-	background-color: #F9F9F9!important;
-    cursor: url(../images/distributeDown.svg), auto;
-}
-*/
-.hover.target-distributive *{ 
-    cursor: url(../images/distributeDown.svg), auto;
-}
-
-
-.target-collection {
-	background-color: #F9F9F9!important;
-	/*background-color: pink!important;
-    cursor: url(../images/collectUp.svg), auto;*/
-}
 .hover:not(#telaRole),.hover:not(#telaRole)>*{
     background-color: yellow!important;
+}*/
+
+/* all valid targets */
+[target]:not([target=""]) {
+	background-color: lightyellow!important;
 }
 
-#telaRole :not(.empty)>.infix.proto{/*#telaRole ÃƒÆ’Ã‚Â¨ aggiunto per rendere piÃƒÆ’Ã‚Â¹ specifico il selector*/
+
+.infix{ z-index:100}
+
+#telaRole :not(.empty)>.infix.proto{/*#telaRole ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¨ aggiunto per rendere piÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¹ specifico il selector*/
 	display:none;
 }
 .infix.plus{
-	margin-left: 3px; */
-	margin-right: 3px; */
+	/* margin-left: 3px; */
+	/* margin-right: 3px; */
+	/* margin-left: -4.75px; */
+	margin-right: -9.5px;
 }
 
 .infix, .power_decoration{/*workaround: altrimenti .power_decoration risultava misteriosamente sortable*/
@@ -555,4 +573,43 @@ border-right-style: solid;
     box-sizing: border-box;/*To prevent padding added to the 100% dimensions.*/
     background-color: #dd9cff6e;
     pointer-events: none;
+}
+
+
+[data-atom=plus]>.ul_role>[data-atom]:not(:first-of-type){
+	margin-left: 9px; /*space for infix symbol*/
+}
+
+.toBeUpdated>.infix{
+	display:none;
+}
+
+.resizable>.ul_role{
+	resize:both;
+	overflow:hidden;
+	border-radius:0px;
+}
+.resizable{
+	border-radius:var(--div-radius) var(--div-radius)  0px var(--div-radius);
+}
+
+.resizable>.ul_role {
+	display:inline-block;// do not know why but it works
+
+}
+.resizable>.ul_role>* {
+	display:inline-flex;// do not know why but it works
+
+}
+.resizable>.ul_role>.infix{
+	display:none;
+}
+.resizable>.ul_role>[data-atom]{
+	margin:0!important;
+}
+
+/*{float:right!important;}*/
+
+.name {
+	pointer-events: none;
 }
