@@ -127,7 +127,7 @@ per una questione estetica */
 
 [data-atom="and"]:not(#telaAnd)>.ul_role {
     border-style:solid;
-    border-width: 0 0 0 20px;
+    border-width:0 0 0 20px;
     border-image:url(../images/GullBraceLeft.svg) 0 47 stretch;
     padding-left:0.5em;
 }
@@ -228,7 +228,7 @@ per una questione estetica */
 }
 
 .asymmetric  {
-	/* border-top-left-radius: 8px; */
+	border-top-left-radius: 8px;
 	margin-bottom: 5px;
 }
 
@@ -379,8 +379,8 @@ per una questione estetica */
 	display:none;
 }
 .infix.plus{
-	margin-left: 3px; */
-	margin-right: 3px; */
+	margin-left: 3px;
+	margin-right: 3px;
 }
 
 .infix, .power_decoration{/*workaround: altrimenti .power_decoration risultava misteriosamente sortable*/
