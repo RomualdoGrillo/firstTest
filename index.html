@@ -13,7 +13,7 @@
 function getText(){
     // read text from URL location
     var request = new XMLHttpRequest();
-    request.open('GET', 'https://romualdogrillo.github.io/test.txt', true);
+    request.open('GET', 'https://romualdogrillo.github.io/firstTest/test.txt', true);
     request.send(null);
     request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
