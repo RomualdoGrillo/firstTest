@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>test</h1>
+<p>load a file from same domain</p>
+
+<input type="button" onclick="alert('i m going to load a file');alert(getText())" value="save">
+
+<script>
+
+function getText(){
+    // read text from URL location
+    var request = new XMLHttpRequest();
+    request.open('GET', 'http://www.puzzlers.org/pub/wordlists/pocket.txt', true);
+    request.send(null);
+    request.onreadystatechange = function () {
+        if (request.readyState === 4 && request.status === 200) {
+            var type = request.getResponseHeader('Content-Type');
+            if (type.indexOf("text") !== 1) {
+                return request.responseText;
+            }
+        }
+    }
+}
+
+</script>
+</body>
+</html>
